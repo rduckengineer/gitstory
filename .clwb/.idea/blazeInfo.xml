@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BlazeCompilerInfoMap">
+    <option name="compilerVersionStringMap">
+      <map>
+        <entry key="//:libgit2_demo_cli" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="//gitxx/tests:repository_test" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="//gitxx:gitxx" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="@@bazel_tools//tools/cpp:malloc" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="@@catch2~3.3.0//:catch2" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="@@catch2~3.3.0//:catch2_generated" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="@@catch2~3.3.0//:catch2_main" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+        <entry key="@@fmt~9.1.0//:fmt" value="gcc (Ubuntu 12.2.0-17ubuntu1) 12.2.0&#10;Copyright (C) 2022 Free Software Foundation, Inc.&#10;This is free software; see the source for copying conditions.  There is NO&#10;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;" />
+      </map>
+    </option>
+  </component>
+</project>

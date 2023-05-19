@@ -1,0 +1,14 @@
+"rduck/gitstory"
+
+module(
+    name = "gitstory",
+    version = "0.1.0",
+    compatibility_level = 1,
+)
+
+libgit2_ext = use_extension("//third_party:libgit2_extension.bzl", "ext")
+use_repo(libgit2_ext, "libgit2")
+
+bazel_dep(name = "rules_foreign_cc", version = "0.9.0")
+bazel_dep(name = "catch2", version = "3.3.0")
+bazel_dep(name = "fmt", version = "9.1.0")

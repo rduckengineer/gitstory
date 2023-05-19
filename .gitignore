@@ -1,0 +1,9 @@
+bazel-*
+WORKSPACE.bzlmod
+
+.clwb/.bazelproject
+.clwb/.blaze
+.aswb/.bazelproject
+.aswb/.blaze
+
+.user.bazelrc

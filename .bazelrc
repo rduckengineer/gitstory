@@ -1,0 +1,15 @@
+common --enable_bzlmod
+
+build --cxxopt=-std=c++20
+
+build:optimized -c opt
+build:optimized --copt=-O3
+#build:optimized --copt=-flto
+
+build:asan --strip=never
+build:asan --copt -fsanitize=address
+build:asan --copt -DADDRESS_SANITIZER
+build:asan --copt -O1
+build:asan --copt -g
+build:asan --copt -fno-omit-frame-pointer
+build:asan --linkopt -fsanitize=address
