@@ -1,4 +1,6 @@
-cc_test(
+load("//gitxx:rules_cc.bzl", "gitxx_cc_test")
+
+gitxx_cc_test(
     name = "repository_test",
     srcs = ["repository_test.cpp"],
     data = ["@libgit2//:test_resources"],

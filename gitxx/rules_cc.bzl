@@ -1,3 +1,5 @@
+_WARNINGS = ["-Werror", "-Wall", "-Wextra"]
+
 def gitxx_cc_library(
         name,
         copts = [],
@@ -10,6 +12,22 @@ def gitxx_cc_library(
         srcs = srcs,
         hdrs = hdrs,
         deps = deps,
-        copts = ["-Werror", "-Wall", "-Wextra"],
+        copts = _WARNINGS + copts,
+        **kwargs
+    )
+
+def gitxx_cc_test(
+        name,
+        srcs,
+        deps = [],
+        data = [],
+        copts = [],
+        **kwargs):
+    native.cc_test(
+        name = name,
+        srcs = srcs,
+        data = data,
+        deps = deps,
+        copts = _WARNINGS + copts,
         **kwargs
     )
