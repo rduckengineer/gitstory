@@ -18,10 +18,9 @@ SCENARIO("Gitxx can open and explore repositories") {
         THEN("Trying to open it throws") {
             using Catch::Matchers::Message;
 
-            CHECK_THROWS_MATCHES(
-                gitxx::repository::open(path), gitxx::git_exception,
-                Message("Error: Notfound. Category: OS. Reason: failed to resolve path "
-                        "'non_existing_path.git': No such file or directory"));
+            CHECK_THROWS_MATCHES(gitxx::repository::open(path), gitxx::git_exception,
+                                 Message("Error: failed to resolve path 'non_existing_path.git': "
+                                         "No such file or directory. (Err: Notfound Cat: OS)"));
         }
     }
 

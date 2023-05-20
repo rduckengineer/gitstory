@@ -7,7 +7,7 @@ git_exception::git_exception(error_code errorCode, error_category errorClass,
     : std::runtime_error([=] {
         auto category = internal::toStr(errorClass);
         auto errCode  = internal::toStr(errorCode);
-        return fmt::format("Error: {}. Category: {}. Reason: {}", errCode, category, message);
+        return fmt::format("Error: {}. (Err: {} Cat: {})", message, errCode, category);
     }()) {}
 
 namespace internal {
