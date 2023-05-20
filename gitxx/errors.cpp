@@ -1,20 +1,23 @@
 #include "errors.hpp"
-
-extern "C" {
-#include <git2/errors.h>
-}
-
-#include <fmt/format.h>
+#include "errors_mapping.inl"
 
 namespace gitxx {
-git_exception::git_exception(int klass, char const* message)
-    : std::runtime_error(fmt::format("Code {}: {}", klass, message)) {}
+git_exception::git_exception(error_code errorCode, error_category errorClass,
+                             std::string_view message)
+    : std::runtime_error([=] {
+        auto category = internal::toStr(errorClass);
+        auto errCode  = internal::toStr(errorCode);
+        return fmt::format("Error: {}. Category: {}. Reason: {}", errCode, category, message);
+    }()) {}
 
 namespace internal {
 void operator<<(error_checker, int errorCode) {
-    if (errorCode != 0) {
+    if (errorCode < GIT_OK) {
         git_error const* err = git_error_last();
-        throw git_exception(err->klass, err->message);
+
+        throw git_exception(internal::fromLibGit2(static_cast<git_error_code>(errorCode)),
+                            internal::fromLibGit2(static_cast<git_error_t>(err->klass)),
+                            err->message);
     }
 }
 } // namespace internal

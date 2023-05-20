@@ -18,10 +18,13 @@ gitxx_cc_library(
     name = "gitxx",
     srcs = [
         "errors.cpp",
+        "errors_mapping.inl",
+        "global.cpp",
         "repository.cpp",
     ],
     hdrs = [
         "errors.hpp",
+        "global.hpp",
         "repository.hpp",
         "unique_ptr.hpp",
     ],

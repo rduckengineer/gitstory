@@ -3,14 +3,16 @@
 
 #include "gitxx/unique_ptr.hpp"
 
+#include <string_view>
+
 struct git_repository;
 
 namespace gitxx {
 class repository {
 public:
-    static repository open(char const* path);
+    static repository open(std::string_view path);
 
-    explicit repository(git_repository* repo);
+    explicit repository(git_repository* repo) noexcept;
 
     explicit operator git_repository*() { return repo_.get(); }
     explicit operator git_repository const*() const { return repo_.get(); }

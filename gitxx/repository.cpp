@@ -6,12 +6,12 @@ extern "C" {
 }
 
 namespace gitxx {
-repository::repository(git_repository* repo)
+repository::repository(git_repository* repo) noexcept
     : repo_{repo, git_repository_free} {}
 
-repository repository::open(char const* path) {
+repository repository::open(std::string_view path) {
     git_repository* ptr{};
-    internal::check << git_repository_open(&ptr, path);
+    throwOnError << git_repository_open(&ptr, path.data());
 
     return repository{ptr};
 }

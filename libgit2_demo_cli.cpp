@@ -1,4 +1,5 @@
 #include "gitxx/repository.hpp"
+#include "gitxx/global.hpp"
 
 extern "C" {
 #include "git2/repository.h"
@@ -30,12 +31,7 @@ int main(int argc, char const* argv[]) {
         return -1;
     }
 
-    struct libInit {
-        libInit() { git_libgit2_init(); }
-        ~libInit() { git_libgit2_shutdown(); }
-    };
-
-    [[maybe_unused]] libInit lib_init{};
+    [[maybe_unused]] gitxx::init_guard g{};
 
     auto repo = gitxx::repository::open(argv[1]);
 
