@@ -13,11 +13,15 @@ git_exception::git_exception(error_code errorCode, error_category errorClass,
 namespace internal {
 void operator<<(error_checker, int errorCode) {
     if (errorCode < GIT_OK) {
-        git_error const* err = git_error_last();
+        using internal::fromLibGit2;
+        auto errCode = fromLibGit2(static_cast<git_error_code>(errorCode));
 
-        throw git_exception(internal::fromLibGit2(static_cast<git_error_code>(errorCode)),
-                            internal::fromLibGit2(static_cast<git_error_t>(err->klass)),
-                            err->message);
+        git_error const* lastError = git_error_last();
+        char const*      message   = lastError ? lastError->message : "No reason available";
+        auto category = lastError ? fromLibGit2(static_cast<git_error_t>(lastError->klass))
+                                  : error_category::Invalid;
+
+        throw git_exception(errCode, category, message);
     }
 }
 } // namespace internal
