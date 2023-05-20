@@ -1,46 +1,22 @@
 #include "gitxx/repository.hpp"
 #include "gitxx/global.hpp"
-
-extern "C" {
-#include "git2/repository.h"
-#include "git2/global.h"
-#include "git2/refs.h"
-#include "git2/oid.h"
-}
+#include "gitxx/oid.hpp"
+#include "gitxx/refs.hpp"
 
 #include <iostream>
-#include <array>
-
-template <size_t N>
-    requires(N < GIT_OID_MAX_HEXSIZE)
-struct static_oid_string {
-    std::array<char, N> buffer;
-
-    explicit static_oid_string(git_oid const* oid) {
-        git_oid_nfmt(buffer.data(), buffer.size(), oid);
-    }
-
-    // NOLINTNEXTLINE (google-explicit-constructor)
-    operator std::string_view() const { return sv(); }
-    [[nodiscard]] std::string_view sv() const { return {buffer.data(), buffer.size()}; }
-};
+#include <fmt/std.h>
 
 int main(int argc, char const* argv[]) {
     if (argc == 1) {
-        std::cerr << "Please provide a git repository path" << std::endl;
+        fmt::print(std::cerr, "Please provide a git repository path\n");
         return -1;
     }
 
     [[maybe_unused]] gitxx::init_guard g{};
 
     auto repo = gitxx::repository::open(argv[1]);
-
-    git_reference* ref;
-    git_repository_head(&ref, static_cast<git_repository*>(repo));
-
-    std::cout << git_reference_name(ref) << "\t"
-              << static_oid_string<6>{git_reference_target(ref)}.sv() << std::endl;
-    git_reference_free(ref);
+    auto head = repo.head();
+    fmt::print(std::cout, "{}\t{}\n", head.name(), head.target().format<6>());
 
     return 0;
 }
