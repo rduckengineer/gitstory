@@ -11,3 +11,15 @@ gitxx_cc_test(
         "@fmt",
     ],
 )
+
+gitxx_cc_test(
+    name = "refs_test",
+    srcs = ["refs_test.cpp"],
+    data = ["@libgit2//:test_resources"],
+    deps = [
+        "//gitxx",
+        "//test:check_invoke_nothrow",
+        "@catch2//:catch2_main",
+        "@fmt",
+    ],
+)

@@ -12,7 +12,7 @@ class reference;
 
 class repository {
 public:
-    static repository open(std::string_view path);
+    [[nodiscard]] static repository open(std::string_view path);
 
     explicit repository(git_repository* repo) noexcept;
 

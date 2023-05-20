@@ -14,6 +14,7 @@ public:
 
     [[nodiscard]] auto name() const -> std::string_view;
     [[nodiscard]] oid  target() const;
+    [[nodiscard]] bool isBranch() const;
 
 private:
     internal::unique_ptr<git_reference> ref_;

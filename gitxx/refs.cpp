@@ -17,4 +17,8 @@ std::string_view reference::name() const {
 oid reference::target() const {
     return oid{git_reference_target(ref_.get())};
 }
+
+bool reference::isBranch() const {
+    return static_cast<bool>(git_reference_is_branch(ref_.get()));
+}
 } // namespace gitxx
