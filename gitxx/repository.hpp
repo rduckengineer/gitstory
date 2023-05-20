@@ -16,6 +16,7 @@ public:
 
     explicit repository(git_repository* repo) noexcept;
 
+    [[nodiscard]] bool      isEmpty() const;
     [[nodiscard]] reference head() const;
 
     explicit operator git_repository*() { return repo_.get(); }

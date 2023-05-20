@@ -17,6 +17,12 @@ repository repository::open(std::string_view path) {
     return repository{ptr};
 }
 
+bool repository::isEmpty() const {
+    int code = git_repository_is_empty(repo_.get());
+    throwOnError << code;
+    return static_cast<bool>(code);
+}
+
 reference repository::head() const {
     git_reference* ref{};
     throwOnError << git_repository_head(&ref, repo_.get());

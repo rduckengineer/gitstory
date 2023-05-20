@@ -1,8 +1,12 @@
 #include "gitxx/repository.hpp"
 #include "gitxx/global.hpp"
 #include "gitxx/errors.hpp"
+#include "gitxx/refs.hpp"
+
+#include "test/check_invoke_nothrow.hpp"
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/generators/catch_generators.hpp>
 #include <catch2/matchers/catch_matchers_exception.hpp>
 
 #include <fmt/format.h>
@@ -24,11 +28,25 @@ SCENARIO("Gitxx can open and explore repositories") {
         }
     }
 
-    GIVEN("An existing repository") {
-        std::string path = fmt::format("{}/empty_bare.git", resource_path);
+    GIVEN("An existing empty repository") {
+        auto        repoInRes = GENERATE("empty_bare.git", "empty_standard_repo/.gitted");
+        std::string path      = fmt::format("{}/{}", resource_path, repoInRes);
 
-        THEN("It can successfully be opened") {
-            CHECK_NOTHROW(gitxx::repository::open(path));
+        THEN("It can successfully be opened but is empty") {
+            auto repository = CHECK_INVOKE_NOTHROW(gitxx::repository::open(path));
+
+            CHECK(repository.isEmpty());
+        }
+    }
+
+    GIVEN("An existing non-empty repository") {
+        std::string path = fmt::format("{}/blametest.git", resource_path);
+
+        THEN("It can be opened and has a HEAD pointing to master") {
+            auto repository = CHECK_INVOKE_NOTHROW(gitxx::repository::open(path));
+
+            REQUIRE_FALSE(repository.isEmpty());
+            CHECK(repository.head().name() == "refs/heads/master");
         }
     }
 }
