@@ -1,0 +1,4 @@
+#ifndef GITSTORY_BLAME_INL
+#define GITSTORY_BLAME_INL
+
+#endif // GITSTORY_BLAME_INL

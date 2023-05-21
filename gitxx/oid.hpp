@@ -18,11 +18,15 @@ public:
     [[nodiscard]] auto format() const -> static_oid_string<N>;
     [[nodiscard]] auto format(std::size_t n = internal::OID_MAX_HEXSIZE) const -> std::string;
 
+    [[nodiscard]] git_oid const* get() const { return oid_; }
+
 private:
     void formatInto(std::span<char> chars) const;
 
     git_oid const* oid_;
 };
+
+git_oid& operator<<(git_oid& lhs, oid const& rhs);
 
 template <std::size_t N>
 auto oid::format() const -> static_oid_string<N> {
