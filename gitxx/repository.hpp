@@ -2,7 +2,6 @@
 #define GITSTORY_REPOSITORY_HPP
 
 #include "gitxx/unique_ptr.hpp"
-#include "gitxx/blame.hpp"
 
 #include <string_view>
 
@@ -10,7 +9,6 @@ struct git_repository;
 
 namespace gitxx {
 class reference;
-class blame;
 
 class repository {
 public:

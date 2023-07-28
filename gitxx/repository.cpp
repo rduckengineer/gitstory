@@ -1,11 +1,9 @@
 #include "repository.hpp"
 #include "errors.hpp"
 #include "refs.hpp"
-#include "blame.hpp"
 
 extern "C" {
 #include "git2/repository.h"
-#include "git2/blame.h"
 }
 
 namespace gitxx {

@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:private"])
+
 load("@rules_foreign_cc//foreign_cc:cmake.bzl", "cmake")
 load("//gitxx:rules_cc.bzl", "gitxx_cc_library")
 
@@ -16,37 +18,117 @@ cmake(
 
 gitxx_cc_library(
     name = "gitxx",
-    srcs = [
-        "blame.cpp",
-        "blob.cpp",
-        "commit.cpp",
-        "errors.cpp",
-        "errors_mapping.inl",
-        "global.cpp",
-        "oid.cpp",
-        "refs.cpp",
-        "repository.cpp",
-        "signature.cpp",
-        "tree.cpp",
+    srcs = ["global.cpp"],
+    hdrs = ["global.hpp"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blame",
+        ":commit",
+        ":repository",
+        "@fmt",
     ],
+)
+
+cc_library(
+    name = "commit",
+    srcs = ["commit.cpp"],
+    hdrs = ["commit.hpp"],
+    deps = [
+        "repository",
+        ":tree",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "tree",
+    srcs = ["tree.cpp"],
+    hdrs = ["tree.hpp"],
+    deps = [
+        "repository",
+        ":blob",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "blob",
+    srcs = ["blob.cpp"],
+    hdrs = ["blob.hpp"],
+    deps = [
+        ":oid",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "blame",
+    srcs = ["blame.cpp"],
+    hdrs = ["blame.hpp"],
+    deps = [
+        ":oid",
+        ":repository",
+        ":signature",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "repository",
+    srcs = ["repository.cpp"],
+    hdrs = ["repository.hpp"],
+    deps = [
+        ":refs",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "refs",
+    srcs = ["refs.cpp"],
+    hdrs = ["refs.hpp"],
+    deps = [
+        ":oid",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "oid",
+    srcs = ["oid.cpp"],
     hdrs = [
-        "blame.hpp",
-        "blame.inl",
-        "blob.hpp",
-        "commit.hpp",
-        "errors.hpp",
-        "global.hpp",
         "oid.hpp",
         "oid_static_string.hpp",
-        "refs.hpp",
-        "repository.hpp",
-        "signature.hpp",
-        "tree.hpp",
-        "unique_ptr.hpp",
     ],
-    visibility = ["//visibility:public"],
+    deps = [
+        ":errors",
+        ":unique_ptr",
+    ],
+)
+
+cc_library(
+    name = "errors",
+    srcs = [
+        "errors.cpp",
+    ],
+    hdrs = [
+        "errors.hpp",
+        "errors_mapping.inl",
+    ],
     deps = [
         ":libgit2",
         "@fmt",
     ],
+)
+
+cc_library(
+    name = "unique_ptr",
+    hdrs = ["unique_ptr.hpp"],
+)
+
+cc_library(
+    name = "signature",
+    srcs = ["signature.cpp"],
+    hdrs = ["signature.hpp"],
+    deps = [":libgit2"],
 )
