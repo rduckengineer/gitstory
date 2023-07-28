@@ -18,7 +18,10 @@ cmake(
 cc_library(
     name = "gitxx",
     srcs = ["global.cpp"],
-    hdrs = ["global.hpp"],
+    hdrs = [
+        "gitxx.hpp",
+        "global.hpp",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         ":blame",
