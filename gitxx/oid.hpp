@@ -10,6 +10,8 @@ struct git_oid;
 
 namespace gitxx {
 class oid {
+    friend class std::hash<gitxx::oid>;
+
 public:
     explicit oid(git_oid const* oid)
         : oid_{oid} {}
@@ -42,5 +44,10 @@ inline auto oid::format(std::size_t n) const -> std::string {
     return buffer;
 }
 } // namespace gitxx
+
+template <>
+struct std::hash<gitxx::oid> {
+    size_t operator()(gitxx::oid const& oid) const;
+};
 
 #endif // GITSTORY_OID_HPP

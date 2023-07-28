@@ -19,3 +19,9 @@ git_oid& operator<<(git_oid& lhs, oid const& rhs) {
     return lhs;
 }
 } // namespace gitxx
+
+size_t std::hash<gitxx::oid>::operator()(gitxx::oid const& oid) const {
+
+    std::string_view bufferAsSv = std::string_view{reinterpret_cast<char const*>(oid.oid_->id), 20};
+    return std::hash<std::string_view>{}(bufferAsSv);
+}

@@ -18,10 +18,16 @@ public:
 
     [[nodiscard]] std::string_view summary() const;
     [[nodiscard]] gitxx::tree      tree() const;
+    [[nodiscard]] gitxx::oid       oid() const;
 
 private:
     internal::unique_ptr<git_commit> commit_;
 };
 } // namespace gitxx
+
+template <>
+struct std::hash<gitxx::commit> {
+    size_t operator()(gitxx::commit const& commit) const;
+};
 
 #endif // GITSTORY_COMMIT_HPP

@@ -23,9 +23,17 @@ std::string_view commit::summary() const {
     return git_commit_summary(commit_.get());
 }
 
+gitxx::oid commit::oid() const {
+    return gitxx::oid{git_commit_id(commit_.get())};
+}
+
 gitxx::tree commit::tree() const {
     git_tree* gitTree{};
     git_commit_tree(&gitTree, commit_.get());
     return gitxx::tree{gitTree};
 }
 } // namespace gitxx
+
+size_t std::hash<gitxx::commit>::operator()(gitxx::commit const& commit) const {
+    return std::hash<gitxx::oid>{}(commit.oid());
+}
