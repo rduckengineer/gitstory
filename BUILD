@@ -6,5 +6,8 @@ package_group(
 cc_binary(
     name = "libgit2_demo_cli",
     srcs = ["libgit2_demo_cli.cpp"],
-    deps = ["//gitxx"],
+    deps = [
+        "//gitxx",
+        "@ftxui",
+    ],
 )

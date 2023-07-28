@@ -2,8 +2,9 @@ common --enable_bzlmod
 
 build --cxxopt=-std=c++20
 build --host_cxxopt=-std=c++20
-
 build --per_file_copt=//.*\.(cc|cpp|cxx|h|hpp|hxx)@-Werror,-Wall,-Wextra
+build --per_file_copt=external/(.*/)+.*\.(cc|cpp|cxx|h|hpp|hxx)@-w
+build --experimental_cc_implementation_deps
 
 build:optimized -c opt
 build:optimized --copt=-O3

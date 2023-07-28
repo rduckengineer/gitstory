@@ -21,7 +21,7 @@ int main(int argc, char const* argv[]) {
         return -1;
     }
 
-    [[maybe_unused]] gitxx::init_guard g{};
+    gitxx::init_guard g{};
 
     auto repo = gitxx::repository::open(argv[1]);
     auto head = repo.head();

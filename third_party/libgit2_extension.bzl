@@ -1,6 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-ext = module_extension(
+libgit2 = module_extension(
     implementation = lambda ctx: http_archive(
         name = "libgit2",
         url = "https://github.com/libgit2/libgit2/archive/refs/tags/v1.6.4.tar.gz",

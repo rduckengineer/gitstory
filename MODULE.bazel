@@ -6,8 +6,10 @@ module(
     compatibility_level = 1,
 )
 
-libgit2_ext = use_extension("//third_party:libgit2_extension.bzl", "ext")
+libgit2_ext = use_extension("//third_party:libgit2_extension.bzl", "libgit2")
 use_repo(libgit2_ext, "libgit2")
+ftxui_ext = use_extension("//third_party:ftxui_extension.bzl", "ftxui")
+use_repo(ftxui_ext, "ftxui")
 
 bazel_dep(name = "rules_foreign_cc", version = "0.9.0")
 bazel_dep(name = "catch2", version = "3.3.0")
