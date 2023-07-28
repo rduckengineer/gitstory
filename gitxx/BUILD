@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:private"])
 
 load("@rules_foreign_cc//foreign_cc:cmake.bzl", "cmake")
-load("//gitxx:rules_cc.bzl", "gitxx_cc_library")
 
 cmake(
     name = "libgit2",
@@ -16,7 +15,7 @@ cmake(
     out_static_libs = ["libgit2.a"],
 )
 
-gitxx_cc_library(
+cc_library(
     name = "gitxx",
     srcs = ["global.cpp"],
     hdrs = ["global.hpp"],
