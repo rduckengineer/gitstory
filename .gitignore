@@ -7,3 +7,5 @@ WORKSPACE.bzlmod
 .aswb/.blaze
 
 .user.bazelrc
+
+MODULE.bazel.lock
