@@ -2,7 +2,13 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "ftxui",
-    deps = [":dom", ":component", ":screen"],
+    deps = [
+        ":dom",
+        ":component",
+        ":screen",
+        ":util",
+    ],
+    includes = ["include"],
 )
 
 cc_library(
@@ -15,7 +21,7 @@ cc_library(
         ],
     ),
     hdrs = glob(["include/ftxui/component/*.hpp"]),
-    strip_include_prefix = "include",
+    includes = ["include"],
     implementation_deps = [
         ":component_internal_headers",
         ":dom",
@@ -39,7 +45,7 @@ cc_library(
         exclude = ["src/ftxui/dom/*_test.cpp"],
     ),
     hdrs = glob(["include/ftxui/dom/*.hpp"]),
-    strip_include_prefix = "include",
+    includes = ["include"],
     implementation_deps = [
         ":dom_internal_headers",
         ":screen",
@@ -60,7 +66,7 @@ cc_library(
         exclude = ["src/ftxui/screen/*_test.cpp"],
     ),
     hdrs = glob(["include/ftxui/screen/*.hpp"]),
-    strip_include_prefix = "include",
+    includes = ["include"],
     implementation_deps = [
         ":screen_internal_headers",
     ],
